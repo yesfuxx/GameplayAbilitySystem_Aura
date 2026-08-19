@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Interaction/EnemyInterface.h"
 #include "AuraPlayerController.generated.h"
 
 struct FInputActionValue;
 class UInputMappingContext;
 class UInputAction;
-class IEnemyInterface;
+
 /**
  * 
  */
@@ -41,6 +42,6 @@ private:
 	void Move(const FInputActionValue& InputActionValue);
 	
 	void CursorTrace();
-	IEnemyInterface* LastActor;
-	IEnemyInterface* ThisActor;
+	TScriptInterface<IEnemyInterface> LastActor;
+	TScriptInterface<IEnemyInterface> ThisActor;
 };

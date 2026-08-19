@@ -27,7 +27,7 @@ void AAuraPlayerController::CursorTrace()
 	if (!CursorHit.bBlockingHit) return;
 	
 	LastActor = ThisActor;
-	ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
+	ThisActor = CursorHit.GetActor();
 	
 	if (LastActor == nullptr)
 	{
@@ -69,9 +69,10 @@ void AAuraPlayerController::BeginPlay()
 	check(AuraContext);
 	
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem);
-	
-	Subsystem->AddMappingContext(AuraContext, 0);
+	if (Subsystem)
+	{
+		Subsystem->AddMappingContext(AuraContext, 0);	
+	}	
 	
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
